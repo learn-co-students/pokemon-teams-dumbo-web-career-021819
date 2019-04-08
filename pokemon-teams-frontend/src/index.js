@@ -58,6 +58,7 @@ mainTag.addEventListener('click', event => {
   if (event.target.innerHTML === "Add Pokemon") {
     const currentTrainerID = parseInt(event.target.dataset.trainerId);
 
+    if (event.target.parentElement.querySelectorAll('li').length < 6) {
     addPokemon(currentTrainerID)
       .then(pokemonObj => {
         const currentCardDivTag = mainTag.querySelector(`[data-id="${currentTrainerID}"]`)
@@ -65,9 +66,12 @@ mainTag.addEventListener('click', event => {
 
         currentCardUlTag.innerHTML += `<li>${pokemonObj.nickname} (${pokemonObj.species}) <button name="free" class="release" data-pokemon-id="${pokemonObj.id}">Release</button></li>`
       })
+    }
+
   } else if (event.target.innerHTML === "Release") {
     const currentPokemon = parseInt(event.target.dataset.pokemonId);
     releasePokemon(currentPokemon);
     event.target.parentElement.remove();
   }
+
 })
