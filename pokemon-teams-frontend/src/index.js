@@ -60,8 +60,7 @@ window.addEventListener('DOMContentLoaded', () => {
       fetch(`http://localhost:3000/pokemons/${event.target.dataset.pokemonId}`, {
         method: 'DELETE'
       }).then(() => {
-        debugger
-        event.target.parentElement.delete();
+        event.target.parentElement.remove();
       })
     };
   });
