@@ -19,7 +19,9 @@ const makeTrainerTag = (trainerObj) => {
 }
 
 const makePokemonTag = (pokemonObj) => {
-    return `<li>${pokemonObj.nickname} (${pokemonObj.species}) <button class="release" data-pokemon-id="${pokemonObj.id}">Release</button></li>`
+    const newLi = document.createElement('li')
+    newLi.innerHTML = `${pokemonObj.nickname} (${pokemonObj.species}) <button class="release" data-pokemon-id="${pokemonObj.id}">Release</button>`
+    return newLi
 }
 
 const loadTrainersAndPokemon = () => {
@@ -29,7 +31,7 @@ const loadTrainersAndPokemon = () => {
         const mainTag = document.querySelector('main');
         mainTag.innerHTML += makeTrainerTag(trainerObj);
         trainerObj.pokemons.forEach (pokemon => {
-            mainTag.lastChild.querySelector('ul').innerHTML += makePokemonTag(pokemon)
+            mainTag.lastChild.querySelector('ul').append(makePokemonTag(pokemon))
         })
     }))
 }
@@ -63,7 +65,16 @@ function addListener() {
                 trainerId: e.target.parentElement.parentElement.parentElement.querySelector('button').dataset.trainerId
             };
             createPokemonInDB(pokemonObj)
-            .then(obj => pokemonLi.parentElement.innerHTML += makePokemonTag(obj))
+            .then(obj => {
+
+                pokemonLi.parentElement.append(makePokemonTag(obj));
+                const form = document.querySelector('#new-pokemon-li')
+                pokemonLi.remove()
+                // debugger
+            })//.then(() => pokemonLi.remove())
+            // e.target.parentElement.remove()
+            // pokemonLi.remove()
+            // console.log(pokemonLi.parentElement)
 
         }
     })
