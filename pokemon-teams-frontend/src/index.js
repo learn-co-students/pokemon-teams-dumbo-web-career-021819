@@ -66,6 +66,12 @@ function postNewPokemon(id) {
    'Accept': "application/json"
   },
    body: JSON.stringify(newPoke)
+ }).then( response => {
+   if(response.status === 201) {
+    location.reload()
+  } else {
+    console.log("Waiting");
+  }
  })
- // location.reload()
+ // createPokemonCard(newPoke)
 }
