@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:3000"
 const TRAINERS_URL = `${BASE_URL}/trainers`
 const POKEMONS_URL = `${BASE_URL}/pokemons`
 
-
+// Main DOM listener
 document.addEventListener('DOMContentLoaded', () => {
 let main = document.querySelector('main');
 let pokemon = fetch(TRAINERS_URL)
@@ -32,6 +32,7 @@ let pokemon = fetch(TRAINERS_URL)
 )}
 );
 
+//creates a pokemon trainer card
 function createTrainerCard (trainer) {
   return `<div class="card" data-id=${trainer.id}><p>${trainer.name}</p>
    <button class="add" data-trainer-id=${trainer.id}>Add Pokemon</button>
@@ -39,17 +40,19 @@ function createTrainerCard (trainer) {
     </div>`
 }
 
+//Creates a pokemon Card
 function createPokemonCard (pokemon) {
   return `
     <li>${pokemon.nickname}(${pokemon.species})<button class="release" data-pokemon-id="${pokemon.id}">Release</button></li>
     `
 }
 
+// Function to delete a pokemon
 function deletePokemon (id) {
   fetch(`http://localhost:3000/pokemons/${id}`, {
     method: 'DELETE' })}
 
-
+// Function that Fetch the new pokemon and renders it
 function postNewPokemon(id) {
   let nick = prompt("What's the nickname?")
   let specie = prompt("What's the species?")
