@@ -1,6 +1,13 @@
 require 'faker'
 
 class PokemonsController < ApplicationController
+
+  def index
+    @pokemons = Pokemon.all
+    render json: @pokemons
+  end
+
+
   def create
     unless pokemon_params[:trainer_id].nil?
       default = {}
@@ -33,6 +40,11 @@ class PokemonsController < ApplicationController
       render json: { error: "Pokemon not Found!" }, status: 404
     end
   end
+
+  # def show
+  #   @pokemon = Pokemon.find(params[:id])
+  #   render json: @pokemon
+  # end
 
   private
   def pokemon_params
